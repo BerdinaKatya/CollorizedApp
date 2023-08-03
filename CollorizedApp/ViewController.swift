@@ -8,11 +8,12 @@
 import UIKit
 
 final class ViewController: UIViewController {
-
     @IBOutlet var colorView: UIView!
+    
     @IBOutlet var redValueLabel: UILabel!
     @IBOutlet var greenValueLabel: UILabel!
     @IBOutlet var blueValueLabel: UILabel!
+    
     @IBOutlet var redSlider: UISlider!
     @IBOutlet var greenSlider: UISlider!
     @IBOutlet var blueSlider: UISlider!
@@ -20,25 +21,27 @@ final class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         colorView.layer.cornerRadius = 20
+        
+        redValueLabel.text = String(format: "%.2f", redSlider.value)
+        greenValueLabel.text = String(format: "%.2f", greenSlider.value)
+        blueValueLabel.text = String(format: "%.2f", blueSlider.value)
+        
+        changeSliderColor()
     }
 
-    @IBAction func redSliderAction() {
-        let roundedValue = round(redSlider.value * 100) / 100
-        redValueLabel.text = roundedValue.formatted()
+    @IBAction func sliderAction(_ sender: UISlider) {
         changeSliderColor()
-    }
-    
-    @IBAction func greenSliderAction() {
-        let roundedValue = round(greenSlider.value * 100) / 100
-        greenValueLabel.text = roundedValue.formatted()
-        changeSliderColor()
-    }
-    
-    @IBAction func blueSliderAction() {
-        let roundedValue = round(blueSlider.value * 100) / 100
-        blueValueLabel.text = roundedValue.formatted()
-        changeSliderColor()
+        
+        switch sender {
+        case redSlider:
+            redValueLabel.text = String(format: "%.2f", redSlider.value)
+        case greenSlider:
+            greenValueLabel.text = String(format: "%.2f", greenSlider.value)
+        default:
+            blueValueLabel.text = String(format: "%.2f", blueSlider.value)
+        }
     }
     
     private func changeSliderColor() {
