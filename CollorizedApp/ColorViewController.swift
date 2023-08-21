@@ -11,7 +11,7 @@ protocol EditColorViewControllerDelegate: AnyObject {
     func setColor(from colorView: UIColor)
 }
 
-final class ColorViewController: UITabBarController {
+final class ColorViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,18 +25,7 @@ final class ColorViewController: UITabBarController {
     }
 }
 
-extension UIColor {
-    var rgbaValue: (red: CGFloat, green: CGFloat, blue: CGFloat, alpha: CGFloat) {
-        var red: CGFloat = 0
-        var green: CGFloat = 0
-        var blue: CGFloat = 0
-        var alpha: CGFloat = 0
-        getRed(&red, green: &green, blue: &blue, alpha: &alpha)
-
-        return (red, green, blue, alpha)
-    }
-}
-
+// MARK: - EditColorViewControllerDelegate
 extension ColorViewController: EditColorViewControllerDelegate {
     func setColor(from colorView: UIColor) {
         view.backgroundColor = colorView
